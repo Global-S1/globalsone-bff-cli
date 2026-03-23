@@ -1,5 +1,5 @@
 {
-  "name": "globalsone-bff-cli",
+  "name": "bff-cli-tools",
   "version": "1.0.0",
   "description": "CLI para generar codigo para el Backend for Frontend (BFF)",
   "type": "module",
