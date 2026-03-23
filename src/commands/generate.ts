@@ -7,6 +7,8 @@ import { CacheGenerator } from '../generators/cache.generator.js';
 import { EndpointGenerator } from '../generators/endpoint.generator.js';
 import { logger } from '../utils/logger.js';
 
+type CommandOptions = Record<string, any>;
+
 export const generateCommand = new Command('generate')
   .alias('g')
   .description('Genera codigo para el BFF');
@@ -21,7 +23,7 @@ generateCommand
   .option('--client <type>', 'Tipo de cliente (web, mobile, tv)')
   .option('--dry-run', 'Preview sin crear archivos')
   .option('--force', 'Sobrescribir archivos existentes')
-  .action(async (name: string, options) => {
+  .action(async (name: string, options: CommandOptions) => {
     try {
       const generator = new AggregatorGenerator();
       await generator.generate({
@@ -49,7 +51,7 @@ generateCommand
   .option('--max-retries <n>', 'Numero maximo de reintentos', '3')
   .option('--dry-run', 'Preview sin crear archivos')
   .option('--force', 'Sobrescribir archivos existentes')
-  .action(async (name: string, options) => {
+  .action(async (name: string, options: CommandOptions) => {
     try {
       const generator = new OrchestratorGenerator();
       await generator.generate({
@@ -79,7 +81,7 @@ generateCommand
   .option('--with-circuit-breaker', 'Incluir circuit breaker')
   .option('--dry-run', 'Preview sin crear archivos')
   .option('--force', 'Sobrescribir archivos existentes')
-  .action(async (name: string, options) => {
+  .action(async (name: string, options: CommandOptions) => {
     try {
       const generator = new AdapterGenerator();
       await generator.generate({
@@ -107,7 +109,7 @@ generateCommand
   .option('--fields <fields>', 'Campos a incluir (separados por coma)')
   .option('--dry-run', 'Preview sin crear archivos')
   .option('--force', 'Sobrescribir archivos existentes')
-  .action(async (name: string, options) => {
+  .action(async (name: string, options: CommandOptions) => {
     try {
       const generator = new TransformerGenerator();
       await generator.generate({
@@ -133,7 +135,7 @@ generateCommand
   .option('--tags <tags>', 'Tags para invalidacion (separados por coma)')
   .option('--dry-run', 'Preview sin crear archivos')
   .option('--force', 'Sobrescribir archivos existentes')
-  .action(async (name: string, options) => {
+  .action(async (name: string, options: CommandOptions) => {
     try {
       const generator = new CacheGenerator();
       await generator.generate({
@@ -161,7 +163,7 @@ generateCommand
   .option('--auth', 'Requiere autenticacion')
   .option('--dry-run', 'Preview sin crear archivos')
   .option('--force', 'Sobrescribir archivos existentes')
-  .action(async (path: string, options) => {
+  .action(async (path: string, options: CommandOptions) => {
     try {
       const generator = new EndpointGenerator();
       await generator.generate({
